@@ -1,0 +1,53 @@
+.task-container {
+  width: 40%;
+  height: 48px;
+  border: 1px solid #3a3a3a;
+  border-radius: 10px;
+  background-color: #fff;
+  padding: 10px;
+}
+
+.task-container-completed {
+  width: 40%;
+  height: 48px;
+  border: 1px solid #3a3a3a;
+  border-radius: 10px;
+  background-color: #d4f1f0;
+  padding: 10px;
+  text-decoration: line-through 4px;
+}
+
+.task-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.task-description {
+  width: 90%;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.task-buttons {
+  width: 10%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.delete-button {
+  background-color: transparent;
+  color: #a70000;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.completed-button {
+  background-color: transparent;
+  color: #028002;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
