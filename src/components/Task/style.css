@@ -1,6 +1,7 @@
 .task-container {
-  width: 40%;
-  height: 48px;
+  width: 88%;
+  height: 56px;
+  display: flex;
   border: 1px solid #3a3a3a;
   border-radius: 10px;
   background-color: #fff;
@@ -8,8 +9,9 @@
 }
 
 .task-container-completed {
-  width: 40%;
-  height: 48px;
+  width: 88%;
+  height: 56px;
+  display: flex;
   border: 1px solid #3a3a3a;
   border-radius: 10px;
   background-color: #d4f1f0;
@@ -18,8 +20,9 @@
 }
 
 .task-content {
+  width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 }
 
