@@ -2,6 +2,8 @@ import './style.css'
 
 import { Task } from './components/Task/Index'
 import { Modal } from './components/Modal/Index'
+import { FilterMenu } from './components/FilterMenu/Index'
+import type { FilterType } from './components/FilterMenu/Index'
 import { useState } from 'react'
 
 interface TaskType {
@@ -47,6 +49,7 @@ export function App() {
 
   const [isAddingTask, setIsAddingTask] = useState(false)
   const [newTaskDescription, setNewTaskDescription] = useState('')
+  const [currentFilter, setCurrentFilter] = useState<FilterType>('all')
 
   const handleToggleComplete = (taskId: number) => {
     setTasks(prevTasks =>
@@ -109,10 +112,30 @@ export function App() {
     setIsAddingTask(false)
   }
 
-  const activeTasks = tasks.filter(task => !task.status.deleted)
+  const getFilteredTasks = () => {
+    switch (currentFilter) {
+      case 'active':
+        return tasks.filter(task => task.status.active && !task.status.deleted)
+      case 'completed':
+        return tasks.filter(
+          task => task.status.completed && !task.status.deleted
+        )
+      case 'deleted':
+        return tasks.filter(task => task.status.deleted)
+      case 'all':
+      default:
+        return tasks.filter(task => !task.status.deleted)
+    }
+  }
+
+  const filteredTasks = getFilteredTasks()
 
   return (
     <>
+      <FilterMenu
+        currentFilter={currentFilter}
+        onFilterChange={setCurrentFilter}
+      />
       <div className="container">
         <div className="content">
           <div className="header">
@@ -120,14 +143,20 @@ export function App() {
           </div>
 
           <div className="tasks-container">
-            {activeTasks.map(task => (
-              <Task
-                key={task.id}
-                task={task}
-                onToggleComplete={handleToggleComplete}
-                onDelete={handleDelete}
-              />
-            ))}
+            {filteredTasks.length > 0 ? (
+              filteredTasks.map(task => (
+                <Task
+                  key={task.id}
+                  task={task}
+                  onToggleComplete={handleToggleComplete}
+                  onDelete={handleDelete}
+                />
+              ))
+            ) : (
+              <div className="no-tasks-message">
+                Nenhuma tarefa encontrada para este filtro.
+              </div>
+            )}
           </div>
 
           <button

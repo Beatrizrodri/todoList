@@ -14,9 +14,8 @@
   display: flex;
   border: 1px solid #3a3a3a;
   border-radius: 10px;
-  background-color: #d4f1f0;
+  background-color: rgb(204, 223, 210);
   padding: 10px;
-  text-decoration: line-through 4px;
 }
 
 .task-content {
