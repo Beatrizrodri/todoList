@@ -1,5 +1,5 @@
 .task-container {
-  width: 88%;
+  width: 800px;
   height: 56px;
   display: flex;
   border: 1px solid #3a3a3a;
@@ -9,12 +9,13 @@
 }
 
 .task-container-completed {
-  width: 88%;
+  width: 800px;
   height: 56px;
   display: flex;
   border: 1px solid #3a3a3a;
   border-radius: 10px;
-  background-color: rgb(204, 223, 210);
+  font-family: 'Roboto Condensed', sans-serif;
+  background-color: #ccdfd2;
   padding: 10px;
 }
 
@@ -27,6 +28,7 @@
 
 .task-description {
   width: 90%;
+  font-family: 'Roboto Condensed', sans-serif;
   font-size: 16px;
   font-weight: 600;
 }

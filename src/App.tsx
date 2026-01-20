@@ -1,10 +1,12 @@
 import './style.css'
 
+import { useState } from 'react'
 import { Task } from './components/Task/Index'
 import { Modal } from './components/Modal/Index'
 import { FilterMenu } from './components/FilterMenu/Index'
 import type { FilterType } from './components/FilterMenu/Index'
-import { useState } from 'react'
+import { TaskChart } from './components/TaskChart/Index'
+import { getTaskStats } from '../src/utils/taskStats'
 
 interface TaskType {
   id: number
@@ -50,6 +52,8 @@ export function App() {
   const [isAddingTask, setIsAddingTask] = useState(false)
   const [newTaskDescription, setNewTaskDescription] = useState('')
   const [currentFilter, setCurrentFilter] = useState<FilterType>('all')
+
+  const stats = getTaskStats(tasks)
 
   const handleToggleComplete = (taskId: number) => {
     setTasks(prevTasks =>
@@ -142,29 +146,41 @@ export function App() {
             <h1>Todo List</h1>
           </div>
 
-          <div className="tasks-container">
-            {filteredTasks.length > 0 ? (
-              filteredTasks.map(task => (
-                <Task
-                  key={task.id}
-                  task={task}
-                  onToggleComplete={handleToggleComplete}
-                  onDelete={handleDelete}
-                />
-              ))
-            ) : (
-              <div className="no-tasks-message">
-                Nenhuma tarefa encontrada para este filtro.
+          <div className="main-content">
+            <div className="tasks-container">
+              <div className="tasks">
+                {filteredTasks.length > 0 ? (
+                  filteredTasks.map(task => (
+                    <Task
+                      key={task.id}
+                      task={task}
+                      onToggleComplete={handleToggleComplete}
+                      onDelete={handleDelete}
+                    />
+                  ))
+                ) : (
+                  <div className="no-tasks-message">
+                    Nenhuma tarefa encontrada para este filtro.
+                  </div>
+                )}
               </div>
-            )}
-          </div>
 
-          <button
-            className="add-task-button"
-            onClick={() => setIsAddingTask(true)}
-          >
-            Adicionar Tarefa
-          </button>
+              <button
+                className="add-task-button"
+                onClick={() => setIsAddingTask(true)}
+              >
+                Adicionar Tarefa
+              </button>
+            </div>
+
+            <div className="chart-wrapper">
+              <TaskChart
+                completed={stats.completed}
+                active={stats.active}
+                deleted={stats.deleted}
+              />
+            </div>
+          </div>
 
           <Modal
             isOpen={isAddingTask}
